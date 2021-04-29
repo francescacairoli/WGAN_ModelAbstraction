@@ -155,7 +155,6 @@ class Discriminator(nn.Module):
         
     def forward(self, trajs, conditions):
         d_in = torch.cat((conditions, trajs), 2)
-        #summary(self.model, d_in)
         out = self.model(d_in)
         out_flat = out.view(out.shape[0], -1)
         validity = self.adv_layer(out_flat)
@@ -279,8 +278,6 @@ if DO_TRAINING:
             d_loss.backward(retain_graph=True)
             optimizer_D.step()
 
-            #optimizer_G.zero_grad()
-
             # Train the generator every n_critic steps
             if i % opt.n_critic == 0:
 
@@ -393,13 +390,10 @@ for kkk in range(ds.n_points_test):
     for d in range(opt.x_dim):
         
         for traj_idx in range(n_trajs_to_plot):
-            #axs[d].plot(tspan, ds.X_test_transp[kkk,traj_idx, d], color=colors[0])
-            #axs[d].plot(tspan, gen_trajectories[kkk,traj_idx,d], color=colors[1])
             axs[d].plot(tspan, R[traj_idx, d], color=colors[0])
             axs[d].plot(tspan, G[traj_idx,d], color=colors[1])
             
     plt.tight_layout()
-    #fig.savefig(plots_path+"/"+opt.model_name+"_Trajectories"+str(kkk)+".png")
     fig.savefig(plots_path+"/"+opt.model_name+"_Rescaled_Trajectories"+str(kkk)+".png")
     plt.close()
 
@@ -412,7 +406,6 @@ if True:
     for kkk in range(ds.n_points_test):
         fig, ax = plt.subplots(opt.x_dim,1, figsize = (12,opt.x_dim*3))
         for d in range(opt.x_dim):
-            #XXX = np.vstack((ds.X_test_transp[kkk,:,d, time_instant], gen_trajectories[kkk,:,d, time_instant])).T
             G = np.array([np.round(ds.HMIN+(gen_trajectories[kkk, it].T+1)*(ds.HMAX-ds.HMIN)/2).T for it in range(ds.n_traj_per_point)])
             R = np.array([np.round(ds.HMIN+(ds.X_test_transp[kkk, it].T+1)*(ds.HMAX-ds.HMIN)/2).T for it in range(ds.n_traj_per_point)])
 
@@ -422,7 +415,6 @@ if True:
             ax[d].legend()
             ax[d].set_ylabel(opt.species_labels[d])
 
-        #figname = plots_path+"/"+opt.model_name+"_hist_comparison_{}th_timestep_{}.png".format(time_instant, kkk)
         figname = plots_path+"/"+opt.model_name+"_rescaled_hist_comparison_{}th_timestep_{}.png".format(time_instant, kkk)
         
         fig.savefig(figname)

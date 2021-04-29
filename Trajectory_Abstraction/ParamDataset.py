@@ -25,8 +25,6 @@ class ParamDataset(object):
         I = data["Y_s0"]
         P = data["Y_par"][:,0:1]
 
-        #print("DATASET SHAPES: ", X.shape, I.shape, P.shape)
-
         self.XMAX = np.max(np.max(X, axis = 0),axis=0)
         self.XMIN = np.min(np.min(X, axis = 0),axis=0)
 
@@ -52,9 +50,7 @@ class ParamDataset(object):
             Y[:,i] = np.hstack((self.P_train_transp, self.I_train_transp[:,i]))
             
         self.Y_train_transp = Y
-        print("TRAINSET SHAPES: ", self.X_train_transp.shape, self.Y_train_transp.shape)
-
-        
+  
         
     def load_test_data(self):
 
@@ -65,8 +61,7 @@ class ParamDataset(object):
         X = data["X"][:,:,:self.traj_len,:]
         I = data["Y_s0"]      
         P = data["Y_par"][:,0:1]  
-        #print("DATASET SHAPES: ", X.shape, Y.shape, P.shape)
-
+        
         self.X_test = -1+2*(X-self.XMIN)/(self.XMAX-self.XMIN)
         
         I = -1+2*(I-self.XMIN)/(self.XMAX-self.XMIN)
@@ -90,8 +85,7 @@ class ParamDataset(object):
             Y[:,i] = np.hstack((self.P_test_transp, self.I_test_transp[:,i]))
             
         self.Y_test_transp = Y
-        print("TESTSET SHAPES: ", self.X_test_transp.shape, self.Y_test_transp.shape)
-
+        
     def load_grid_test_data(self):
 
         file = open(self.grid_test_fn, 'rb')
@@ -100,9 +94,8 @@ class ParamDataset(object):
 
         X = data["X"][:,:,:self.traj_len,:]
         I = data["Y_s0"] 
-        P = data["Y_par"][:,0:1]        
-        #print("DATASET SHAPES: ", X.shape, Y.shape, P.shape)
-
+        P = data["Y_par"][:,0:1]
+        
         self.X_test_grid = -1+2*(X-self.XMIN)/(self.XMAX-self.XMIN)
         
         I = -1+2*(Y-self.XMIN)/(self.XMAX-self.XMIN)

@@ -1,15 +1,12 @@
-python conditional_dcwgan_gp.py --n_epochs 100 --model_name ToggleSwitch --traj_len 32 --x_dim 2 --batch_size 256 --species_labels ["P1","P2"]
+python gp_model_abstraction.py --n_epochs 100 --model_name ToggleSwitch --traj_len 32 --x_dim 2 --batch_size 256 --species_labels ["P1","P2"] --po_flag True
 
-python conditional_dcwgan_gp.py --n_epochs 100 --model_name Oscillator --traj_len 32 --x_dim 3 --batch_size 256 --species_labels ["A","B","C"]
+python gp_model_abstraction.py--n_epochs 100 --model_name Oscillator --traj_len 32 --x_dim 3 --batch_size 256 --species_labels ["A","B","C"]
 
-python conditional_dcwgan_gp.py --n_epochs 100 --model_name eSIRS --traj_len 32 --x_dim 2 --batch_size 256 --species_labels ["S","I"]
+python gp_model_abstraction.py --n_epochs 100 --model_name eSIRS --traj_len 32 --x_dim 2 --batch_size 256 --species_labels ["S","I"]
 
-python conditional_dcwgan_gp.py --n_epochs 100 --model_name SIR --traj_len 16 --x_dim 3 --batch_size 256 --species_labels ["S","I","R"]
+python gp_model_abstraction.py --n_epochs 100 --model_name SIR --traj_len 16 --x_dim 3 --batch_size 256 --species_labels ["S","I","R"]
 
+python param_gp_model_abstraction -n_epochs 100 --model_name MAPK --traj_len 32 --x_dim 1 --par_dim 1 --batch_size 256 --species_labels ["V1","MAPK-PP"] --po_flag True
 
-python model_abstraction.py --n_epochs 1 --model_name ToggleSwitch --traj_len 32 --x_dim 2 --batch_size 256
-
---training flag False
---loading_id "111"
 
 

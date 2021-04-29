@@ -51,8 +51,7 @@ class Dataset(object):
 
         X = data["X"][:,:,:self.traj_len,:]
         Y = data["Y_s0"]        
-        print("DATASET SHAPES: ", X.shape, Y.shape)
-
+        
         self.X_test = -1+2*(X-self.HMIN)/(self.HMAX-self.HMIN)
         
         Y = -1+2*(Y-self.HMIN)/(self.HMAX-self.HMIN)
@@ -79,8 +78,7 @@ class Dataset(object):
 
         X = data["X"][:,:,:self.traj_len,:]
         Y = data["Y_s0"]        
-        print("DATASET SHAPES: ", X.shape, Y.shape)
-
+        
         self.X_test_grid = -1+2*(X-self.HMIN)/(self.HMAX-self.HMIN)
         
         Y = -1+2*(Y-self.HMIN)/(self.HMAX-self.HMIN)
